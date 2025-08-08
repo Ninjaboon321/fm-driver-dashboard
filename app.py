@@ -3,7 +3,6 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime, date, timedelta
-import bcrypt
 import random
 import numpy as np
 
@@ -17,14 +16,14 @@ st.set_page_config(
 
 # Sample user database (in production, this would be a real database)
 USERS = {
-    "driver001": {"password": "$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewG7HSz8.E9oBOtO", "name": "John Smith"},  # password: driver123
-    "driver002": {"password": "$2b$12$EixZFyXLzOvqYz8zOoU1sOKUpJ4F/2JlGKSP5gHJpTG8HzT2v8M6e", "name": "Sarah Johnson"},  # password: sarah456
-    "driver003": {"password": "$2b$12$5s8EjLyXrGwqeRc2tKQv3eH7cFr1gBpZoQkNmJdXvP4aWzY9sL0mS", "name": "Mike Wilson"}  # password: mike789
+    "driver001": {"password": "driver123", "name": "John Smith"},
+    "driver002": {"password": "sarah456", "name": "Sarah Johnson"},
+    "driver003": {"password": "mike789", "name": "Mike Wilson"}
 }
 
-def verify_password(plain_password, hashed_password):
-    """Verify a password against its hash."""
-    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
+def verify_password(plain_password, stored_password):
+    """Verify a password against stored password."""
+    return plain_password == stored_password
 
 def generate_mock_data(user_id):
     """Generate mock performance data for a driver."""
@@ -299,4 +298,5 @@ def main():
         login_page()
 
 if __name__ == "__main__":
+
     main() 
